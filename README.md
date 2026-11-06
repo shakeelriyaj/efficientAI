@@ -13,8 +13,8 @@ exit, and an eight-layer distilled student. English code; five small core files.
   history, including discarded trials. It is longer than the final codebase.
 - **Results:** [simple HPC report](reports/HPC_Reproduction_Report.txt), with
   metrics, predictions, raw timings, logs, and verification in `reports/nyu_hpc/`.
-- **Team context:** [Shakeel's shared repository](https://github.com/shakeelriyaj/efficientAI)
-  was empty when checked. This is a separate repository for the FinBERT work.
+- **Team context:** this work lives on the `finbert-hpc-reproduction` branch of
+  [the shared repository](https://github.com/shakeelriyaj/efficientAI).
 
 Large checkpoints and training inputs stay outside Git. Their exact input hashes
 are in `reference/assets_manifest.json`; the existing Torch copy is listed below.
