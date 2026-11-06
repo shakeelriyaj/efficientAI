@@ -1,0 +1,16 @@
+            name  macro_f1  mean_layers  f1_drop_pp  within_budget  unique_headlines  timed_predictions_per_mode  model_mean_ms  model_p50_ms  model_p95_ms  e2e_mean_ms  e2e_p50_ms  e2e_p95_ms
+          full12  0.878955    12.000000    0.000000           True               512                        1536       2.322252      2.310304      2.415668     2.546274    2.538713    2.659468
+dynamic8_quality  0.875099    10.329307    0.385644           True               512                        1536       2.130653      2.378162      2.532058     2.353391    2.607005    2.769030
+compact8_student  0.876573     8.000000    0.238176           True               512                        1536       1.654904      1.648775      1.726386     1.873046    1.864409    1.964602
+Differences from Colab: {'full12': {'labels': 0, 'depths': 0}, 'dynamic8_quality': {'labels': 0, 'depths': 0}, 'compact8_student': {'labels': 0, 'depths': 0}}
+Epoch 0: validation macro-F1 0.800561
+Epoch 1: validation macro-F1 0.870054
+Epoch 2: validation macro-F1 0.878088
+Epoch 3: validation macro-F1 0.881551
+Epoch 4: validation macro-F1 0.881816
+Epoch 5: validation macro-F1 0.877687
+            name  macro_f1  mean_layers  f1_drop_pp  within_budget  unique_headlines  timed_predictions_per_mode  model_mean_ms  model_p50_ms  model_p95_ms  e2e_mean_ms  e2e_p50_ms  e2e_p95_ms
+          full12  0.878955    12.000000    0.000000           True               512                        1536       2.367282      2.350791      2.484176     2.571249    2.558978    2.681758
+dynamic8_quality  0.875099    10.329307    0.385644           True               512                        1536       2.156128      2.401401      2.572832     2.370793    2.622605    2.801155
+compact8_student  0.879177     8.000000   -0.022213           True               512                        1536       1.692391      1.680061      1.780215     1.896512    1.884975    2.000876
+Differences from Colab: {'full12': {'labels': 0, 'depths': 0}, 'dynamic8_quality': {'labels': 0, 'depths': 0}, 'compact8_student': {'labels': 42, 'depths': 0}}

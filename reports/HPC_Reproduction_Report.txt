@@ -1,0 +1,78 @@
+NYU HPC reproduction — November 5, 2026
+
+Saved-model replay: PASSED on NYU Torch, CPU node cs638.
+Job 22013816 completed successfully in 4 minutes 7 seconds.
+All 1,573 test headlines matched Colab exactly for each of the three models:
+zero label differences and zero exit-depth differences.
+
+Model                 Macro-F1   Drop from full model
+Full 12 layers        0.878955   —
+Dynamic layer-8 exit  0.875099   0.386 percentage points
+Compact 8-layer       0.876573   0.238 percentage points
+
+Both compressed models meet the observed 1 percentage point budget.
+All original teacher weights were verified unchanged.
+
+GPU replay, benchmark, and fresh training: PASSED.
+Job 22013353 completed successfully in 2 minutes 33 seconds on node gb002,
+using an NVIDIA B200. Both GPU runs verified every timed label and exit depth:
+9,216 timing records per run, 18,432 records in total.
+
+Saved-checkpoint GPU replay
+Every model again matched every Colab test label and exit depth exactly.
+                         Macro-F1   Median end-to-end latency
+Full 12 layers           0.878955   2.539 ms
+Dynamic layer-8 exit     0.875099   2.607 ms
+Original compact student 0.876573   1.864 ms
+The saved compact student has 26.6% lower median latency on this GPU.
+
+Fresh student training and paired benchmark
+                         Macro-F1   Median end-to-end latency
+Full 12 layers           0.878955   2.559 ms
+Dynamic layer-8 exit     0.875099   2.623 ms
+Fresh compact student    0.879177   1.885 ms
+The fresh student has 26.3% lower median latency and 26.2% lower mean latency.
+Its observed F1 drop is -0.022 percentage points: similar quality to the full
+model, with a tiny numerical improvement. It passes the 1 point limit.
+
+Validation selected epoch 4 of 5, with validation macro-F1 0.881816.
+Fresh training differs from the Colab student on 42 test labels, as expected
+for a new run on different GPU hardware. It is not the identical checkpoint.
+The teacher and dynamic head still match Colab exactly and remain unchanged.
+
+Dynamic exit still has overhead: median latency is 2.5% higher than the full
+model in the fresh-training benchmark, although mean latency is 7.8% lower.
+The fixed eight-layer student gives the clearer speed improvement here.
+
+Codebase
+Five core Python files, fewer than 400 lines in total. Read run.py first.
+Supporting files contain the settings, pinned dependencies, input preparation,
+two Slurm scripts, three tests, and frozen Colab reference results.
+Checkpoints and data are separate from the source ZIP.
+
+HPC location: /scratch/wk2376/efficient-ai-repro-20261105
+Account used: torch_pr_1349_general
+Python 3.13.16, PyTorch 2.11.0, Transformers 4.48.3.
+The environment setup ran on a CPU compute node, job 22012608.
+
+What training reproduces
+The original 12-layer teacher and improved dynamic exit head are saved inputs.
+The new training run updates every parameter of the 8-layer student, retaining
+teacher blocks 1, 2, 4, 5, 7, 8, 10, and 12 plus one final classifier.
+It uses the same frozen splits, seed 4142, and five-epoch distillation recipe.
+Validation selects the checkpoint; no test-based tuning is performed here.
+This reproduces the final comparison, not every earlier exploratory experiment.
+
+Limits
+New GPU hardware can change training numerics and milliseconds. Speed must be
+compared with the full model on that same GPU. Matching saved predictions is
+distinct from reproducing a new training run. The test set was used during
+earlier development, and the observed F1 budget is not a population guarantee.
+
+Evidence: reports/nyu_hpc/ contains CPU replay, GPU replay, fresh-training
+metrics, all predictions and raw timings, environment details, comparisons,
+verification records, training history, Slurm logs, accounting records, and
+the source checksums verified on HPC. Large model weights stay outside Git;
+the fresh checkpoint is on HPC under results/retrain-22013353/student and
+was also delivered separately as NYU_HPC_Compact8_Checkpoint.zip.
+Three focused code tests also passed locally.

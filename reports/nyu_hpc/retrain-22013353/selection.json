@@ -1,0 +1,15 @@
+{
+  "best_epoch": 4,
+  "validation_macro_f1": 0.8818163047822872,
+  "test_used_for_selection": false,
+  "kept_layers": [
+    1,
+    2,
+    4,
+    5,
+    7,
+    8,
+    10,
+    12
+  ]
+}

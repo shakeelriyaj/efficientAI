@@ -1,0 +1,5 @@
+            name  macro_f1  mean_layers  f1_drop_pp  within_budget
+          full12  0.878955    12.000000    0.000000           True
+dynamic8_quality  0.875099    10.329307    0.385644           True
+compact8_student  0.876573     8.000000    0.238176           True
+Differences from Colab: {'full12': {'labels': 0, 'depths': 0}, 'dynamic8_quality': {'labels': 0, 'depths': 0}, 'compact8_student': {'labels': 0, 'depths': 0}}

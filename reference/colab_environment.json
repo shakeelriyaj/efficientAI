@@ -1,0 +1,26 @@
+{
+  "python": "3.13.16",
+  "platform": "Linux-6.6.159+-x86_64-with-glibc2.39",
+  "torch": "2.11.0+cu130",
+  "transformers": "4.48.3",
+  "numpy": "2.4.6",
+  "pandas": "2.2.3",
+  "sklearn": "1.6.1",
+  "device": "cuda",
+  "cuda_runtime": "13.0",
+  "gpu_name": "Tesla T4",
+  "gpu_memory_bytes": 15637086208,
+  "cpu_threads": 1,
+  "inference_dtype": "float32",
+  "attention_implementation": "eager",
+  "tf32": false,
+  "package_versions": {
+    "scipy": "1.16.3",
+    "matplotlib": "3.10.0",
+    "requests": "2.32.4",
+    "tqdm": "4.67.3",
+    "tokenizers": "0.21.4",
+    "safetensors": "0.8.0"
+  },
+  "timing": "batch=1, serialized, synchronized wall clock, randomized policy order"
+}

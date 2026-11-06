@@ -1,0 +1,16 @@
+assets/
+results/
+logs/
+.venv/
+.python/
+.bootstrap/
+.cache/
+__pycache__/
+.pytest_cache/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+.env
+*.pt
+*.safetensors
+*.zip

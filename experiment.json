@@ -1,0 +1,20 @@
+{
+  "max_length": 96,
+  "batch_size": 16,
+  "seed": 4142,
+  "epochs": 5,
+  "learning_rate": 0.00002,
+  "weight_decay": 0.01,
+  "warmup_fraction": 0.1,
+  "gold_weight": 0.75,
+  "distillation_temperature": 2.0,
+  "kept_layers": [1, 2, 4, 5, 7, 8, 10, 12],
+  "exit_layer": 8,
+  "exit_threshold": 0.9,
+  "exit_temperature": 1.2914971148258343,
+  "latency_samples": 512,
+  "timing_repeats": 3,
+  "timing_seed": 10143,
+  "warmup": 10,
+  "f1_drop_budget": 0.01
+}
