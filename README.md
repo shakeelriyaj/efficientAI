@@ -99,6 +99,34 @@ history. Rebuilt assets work with `run_exits.py`. They lack Colab's `head8.pt`,
 student, and teacher weights, so `run.py verify` and `run.py train` (which
 compare against Colab predictions) are for the original assets only.
 
+## Run on NYU Cloud Bursting (course allocation)
+
+Use Open OnDemand at https://ood.burst.hpc.nyu.edu/ (NYU VPN off campus), start
+a Jupyter session, and open its terminal. Every job needs the course account;
+choose the partition per job: `n2c48m24` (CPU) or `c12m85-a100-1` (1 × A100 40GB).
+
+```bash
+git clone -b finbert-hpc-reproduction https://github.com/shakeelriyaj/efficientAI.git
+cd efficientAI && mkdir -p logs
+ACCOUNT=csci_ga_3033-2026fa; GPU=c12m85-a100-1; CPU=n2c48m24
+
+# 1. Check the GPU driver once. PyTorch's default build needs driver 580+.
+srun --account=$ACCOUNT --partition=$GPU --gres=gpu:1 --time=00:10:00 nvidia-smi
+# 2. Python environment (CPU node). If the driver is below 580, prefix with
+#    FINBERT_TORCH_CUDA=cu128 to install the CUDA 12.8 PyTorch build instead.
+sbatch --account=$ACCOUNT --partition=$CPU hpc/setup.sbatch
+# 3. After setup finishes: download public inputs, then build splits + teacher.
+.venv/bin/python tools/build_assets.py download --out assets
+sbatch --account=$ACCOUNT --partition=$GPU hpc/build_assets.sbatch
+# 4. After the build finishes: the multi-exit study.
+sbatch --account=$ACCOUNT --partition=$GPU hpc/exits.sbatch
+```
+
+Cloud nodes start on demand, so a job may wait a few minutes before running.
+`squeue -u $USER` shows job state; logs are in `logs/`. Each GPU log begins with
+the GPU name and driver. The scripts run without a container here; on Torch
+they use NYU's CUDA image automatically.
+
 ## Run on NYU Torch
 
 From this codebase's root, after copying it and its `assets/` folder to Torch:
@@ -109,6 +137,7 @@ setup_job=$(sbatch --parsable --account=torch_pr_1349_general hpc/setup.sbatch)
 sbatch --account=torch_pr_1349_general --dependency=afterok:$setup_job hpc/run.sbatch
 ```
 
+On Torch, add `--constraint=cuda` to GPU jobs, as the original runs did.
 Use your own active account from `my_slurm_accounts` if running under another
 allocation. The setup job installs Python 3.13.16 and the pinned ML packages on
 a CPU compute node. The reproduction job requests one NVIDIA GPU and runs both
