@@ -79,6 +79,26 @@ python tools/prepare_assets.py \
 The preparation script checks all inputs against the frozen reference hashes.
 No account, Hugging Face access, or model download is needed after preparation.
 
+### Rebuilding inputs from public sources (no archives or shared folder)
+
+`tools/build_assets.py` recreates `assets/` from the pinned public SEntFiN commit
+and `ProsusAI/finbert` revision. The rebuilt splits are byte-identical to Colab's
+(all six split checksums match). The teacher is fine-tuned again with the
+notebook's recipe (3 epochs, seed 42), so it is a new run, not Colab's weights.
+
+```bash
+mkdir -p logs
+sbatch --account=torch_pr_1349_general hpc/setup.sbatch       # once: Python environment
+.venv/bin/python tools/build_assets.py download --out assets   # login node: downloads only
+sbatch --account=torch_pr_1349_general hpc/build_assets.sbatch # GPU: splits + teacher
+sbatch --account=torch_pr_1349_general hpc/exits.sbatch        # then the multi-exit study
+```
+
+`assets/build_record.json` records the data audit, split check, and teacher
+history. Rebuilt assets work with `run_exits.py`. They lack Colab's `head8.pt`,
+student, and teacher weights, so `run.py verify` and `run.py train` (which
+compare against Colab predictions) are for the original assets only.
+
 ## Run on NYU Torch
 
 From this codebase's root, after copying it and its `assets/` folder to Torch:
