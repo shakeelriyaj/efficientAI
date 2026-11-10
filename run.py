@@ -34,16 +34,33 @@ def evaluate(teacher, student, dynamic, tokenizer, frame, cfg, device):
     return quality, result
 
 
+def environment(device):
+    return {"python": platform.python_version(), "torch": torch.__version__,
+            "transformers": transformers.__version__, "numpy": np.__version__, "pandas": pd.__version__,
+            "gpu": torch.cuda.get_device_name(device) if device.type == "cuda" else str(device),
+            "cuda": torch.version.cuda, "threads": torch.get_num_threads(), "tf32": False, "inference": "FP32 eager",
+            "packages": {d.metadata["Name"]: d.version for d in importlib.metadata.distributions()}}
+
+
+def load_config(path, seed=None):
+    """Read experiment settings; an explicit seed replaces only the training seed."""
+    cfg = json.loads(Path(path).read_text())
+    if seed is not None:
+        cfg["seed"] = seed
+    return cfg
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=["verify", "train"])
     parser.add_argument("--assets", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--config", type=Path, default=Path(__file__).with_name("experiment.json"))
+    parser.add_argument("--seed", type=int, help="Override the training seed from the config")
     parser.add_argument("--device", default="cuda")
     parser.add_argument("--skip-timing", action="store_true", help="Quality-only debugging; not a speed result")
     args = parser.parse_args()
-    cfg = json.loads(args.config.read_text())
+    cfg = load_config(args.config, args.seed)
     args.out.mkdir(parents=True, exist_ok=False)
     save_json(args.out / "config.json", cfg)
     seed_everything(cfg["seed"])
@@ -81,11 +98,7 @@ def main():
               "test_used_for_selection": False, "test_set_reused": True,
               "quality_examples": len(predictions), "timed_predictions_checked": 0 if args.skip_timing else len(raw),
               "student_quality_budget_met": bool(quality.loc[quality.name == "compact8_student", "within_budget"].iloc[0])})
-    save_json(args.out / "environment.json", {"python": platform.python_version(), "torch": torch.__version__,
-              "transformers": transformers.__version__, "numpy": np.__version__, "pandas": pd.__version__,
-              "gpu": torch.cuda.get_device_name(device) if device.type == "cuda" else str(device),
-              "cuda": torch.version.cuda, "threads": torch.get_num_threads(), "tf32": False, "inference": "FP32 eager",
-              "packages": {d.metadata["Name"]: d.version for d in importlib.metadata.distributions()}})
+    save_json(args.out / "environment.json", environment(device))
     print(quality.to_string(index=False), flush=True)
     print("Differences from Colab:", mismatches, flush=True)
     if not exact:

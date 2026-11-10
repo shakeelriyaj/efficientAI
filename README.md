@@ -32,6 +32,9 @@ Read `run.py` first. It connects these four helpers:
 `experiment.json` contains the settings. No notebook history, plotting framework,
 or hyperparameter search is needed to run this comparison.
 
+The proposal's multi-exit study has its own entry point, `run_exits.py`, with
+the exit logic in `exits.py` and settings in `exits.json` (see below).
+
 ## What is reproduced
 
 1. **Saved-model replay:** load the exact Colab weights and compare every test
@@ -103,10 +106,62 @@ metrics, per-headline predictions, raw timings, environment details, and a
 verification record. Training also saves the selected standard Hugging Face
 checkpoint, training history, and validation selection record.
 
+### Several training seeds
+
+`--seed N` replaces only the training seed from `experiment.json`; each output's
+`config.json` records the seed used. To retrain the student with ten seeds
+fixed in advance (4142 repeats the original run), one GPU task per seed:
+
+```bash
+seeds_job=$(sbatch --parsable --account=torch_pr_1349_general hpc/seeds.sbatch)
+# after all tasks finish:
+.venv/bin/python tools/summarize_seeds.py results/seeds-$seeds_job
+```
+
+The summary writes `seed_summary.csv` and `seed_summary.txt`: mean, spread, and
+worst-seed student F1 drop, runs within budget, selected epochs, and per-run
+latency reduction against the full model on the same GPU. Report every seed.
+Seed spread measures training variation only, not test-set uncertainty.
+
 Timing uses FP32 eager inference, batch size one, one CPU thread, 512 unique
 headlines, three repeats per timing mode, and ten excluded warmup predictions.
 Both modes include a CPU label. End-to-end timing also includes tokenization
 and input transfer. Three routes produce 9,216 checked timing records per run.
+
+## Multi-exit study (layers 2, 4, 8; max-probability or entropy)
+
+`run_exits.py` implements the proposal's method on the frozen teacher:
+
+1. Train one exit head per layer in `exit_layers` (a copy of the teacher's
+   pooler and classifier) on that layer's [CLS] vector. Loss: 75% gold-label CE
+   plus 25% teacher KL; teacher mistakes use gold labels alone. Validation F1
+   picks each head's epoch. Only training labels enter backward().
+2. Fit one temperature per head on the calibration split.
+3. Record, for every validation and test headline at batch size one, each
+   exit's calibrated max probability, normalized entropy (0 certain, 1 uniform),
+   and label. Any policy can then be scored exactly without rerunning the model.
+4. Sweep both rules over the exit sets {8}, {4,8}, {2,8}, {2,4,8} and the
+   threshold grids in `exits.json`. Keep policies within the validation F1 limit
+   (0.75 points, leaving margin for the 1-point test budget), take the fewest
+   mean layers per rule and exit set, time those finalists on validation, and
+   select the fastest median per rule.
+5. Evaluate once on test: full model, static exits at each layer, and the two
+   selected dynamic policies. Real batch-one predictions must equal the
+   simulation exactly, and every timed prediction is checked.
+
+```bash
+sbatch --account=torch_pr_1349_general hpc/exits.sbatch        # default seed 3142
+sbatch --account=torch_pr_1349_general hpc/exits.sbatch 7      # another head seed
+.venv/bin/python run_exits.py --assets assets --out results/exits-debug --device cpu --skip-timing
+```
+
+Outputs: `metrics.csv` (quality, exit distribution, latency, speedup),
+`validation_sweep.csv` (every candidate policy, for trade-off curves),
+`validation_timing.csv`, `selected_policies.json`, `calibration.csv`,
+`head_history.json`, `predictions.csv` (with text, for error analysis),
+`test_exit_scores.csv` (per-headline exit confidences), `timings.csv`,
+`exit_heads.pt`, `temperatures.json`, and `verification.json`. With
+`--skip-timing`, policies are chosen by mean layers, so it is not a speed result.
 
 ## Limits
 
@@ -122,7 +177,7 @@ NYU instructions: [connection](https://services.rt.nyu.edu/docs/hpc/connecting_t
 
 ## Checks
 
-`python -m pytest tests` runs three focused tests (requires pytest). They check
+`python -m pytest tests` runs twelve focused tests (requires pytest). They check
 that teacher errors use gold labels, student training preserves the teacher,
 and an early exit actually skips later blocks. `source_sha256.json` records
 the reviewed code version. The full local saved-model replay also matches all

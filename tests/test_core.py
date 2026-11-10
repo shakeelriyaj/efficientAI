@@ -8,6 +8,7 @@ import pandas as pd
 
 from data import loader, logits_for, macro_f1
 from models import DynamicExit, fingerprint, make_student
+from run import load_config
 from train import distillation_loss, train_student
 
 
@@ -67,3 +68,10 @@ def test_dynamic_exit_really_skips_later_blocks(tmp_path):
     assert route.predict(tokens)[1] == 3
     assert calls == [1]
     handle.remove()
+
+
+def test_seed_override_changes_only_the_seed(tmp_path):
+    path = tmp_path / "experiment.json"
+    path.write_text(json.dumps({"seed": 4142, "epochs": 5}))
+    assert load_config(path) == {"seed": 4142, "epochs": 5}
+    assert load_config(path, seed=7) == {"seed": 7, "epochs": 5}
