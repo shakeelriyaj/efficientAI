@@ -1,11 +1,13 @@
 import json
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import pytest
 import torch
 
 from exits import MultiExit
-from run_batch_exits import FULL, predict_batch
+from run_batch_exits import FULL, load_frozen_policies, predict_batch
 from test_exits import tiny_teacher, tokenizer, varied_heads
 
 
@@ -98,3 +100,21 @@ def test_validation_selection_and_report_on_cpu(monkeypatch, tmp_path, tokenizer
         name: [1, 4] for name in metrics.name.unique()
     }
     assert len(pd.read_csv(tmp_path / "predictions.csv")) == 90
+
+
+def test_load_frozen_policies_replays_the_a100_run(tmp_path):
+    source = Path(__file__).resolve().parents[1] / "reports/nyu_hpc/batch-exits-29406/selected_policies.json"
+    reference = ((8, 0.76),)
+    fixed, shared, adaptive = load_frozen_policies(source, reference, [2, 4, 8])
+
+    assert fixed == shared == reference
+    assert adaptive == {1: reference, 4: FULL, 16: FULL, 32: reference}
+    with pytest.raises(ValueError, match="different reference policies"):
+        load_frozen_policies(source, ((8, 0.9),), [2, 4, 8])
+
+    saved = json.loads(source.read_text())
+    del saved["adaptive"]["32"]
+    incomplete = tmp_path / "selected_policies.json"
+    incomplete.write_text(json.dumps(saved))
+    with pytest.raises(ValueError, match="must cover batch sizes"):
+        load_frozen_policies(incomplete, reference, [2, 4, 8])

@@ -121,6 +121,32 @@ def load_scalar_reference(exit_run):
     return tuple((layer, policy["threshold"]) for layer in sorted(policy["exit_layers"]))
 
 
+def load_frozen_policies(path, reference, exit_layers):
+    """Read the schedules written by select_policies, including full inference."""
+    saved = json.loads(path.read_text())
+
+    def schedule(entries):
+        policy = tuple((layer, threshold) for layer, threshold in entries)
+        layers = [layer for layer, _ in policy]
+        if layers != sorted(set(layers)) or any(
+            layer not in exit_layers or not 0 <= threshold <= 1
+            for layer, threshold in policy
+        ):
+            raise ValueError(f"Invalid frozen exit schedule: {policy}")
+        return policy
+
+    if saved["scalar_reference"] != (
+        None if reference is None else [list(entry) for entry in reference]
+    ):
+        raise ValueError("Frozen policies and --exit-run use different reference policies")
+    if set(saved["adaptive"]) != {str(size) for size in BATCH_SIZES}:
+        raise ValueError(f"Frozen policies must cover batch sizes {BATCH_SIZES}")
+    fixed = None if saved["fixed"] is None else schedule(saved["fixed"])
+    shared = schedule(saved["shared"])
+    adaptive = {size: schedule(saved["adaptive"][str(size)]) for size in BATCH_SIZES}
+    return fixed, shared, adaptive
+
+
 def select_policies(make_route, reference, frame, encode, device, cfg, out):
     policies = list(dict.fromkeys([FULL, *candidate_policies(cfg)]))
     if reference is not None and reference not in policies:
@@ -204,12 +230,16 @@ def main():
     parser.add_argument("--assets", type=Path, required=True)
     parser.add_argument("--exit-run", type=Path, required=True,
                         help="Existing run_exits.py output containing trained heads and temperatures")
+    parser.add_argument("--frozen-policies", type=Path,
+                        help="Replay selected_policies.json from a prior batch benchmark")
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
     if not torch.cuda.is_available():
         parser.error("The latency study requires CUDA.")
     cfg = load_config(args.exit_run / "config.json")
     reference = load_scalar_reference(args.exit_run)
+    frozen = (load_frozen_policies(args.frozen_policies, reference, cfg["exit_layers"])
+              if args.frozen_policies is not None else None)
     seed_everything(cfg["seed"])
     device = torch.device("cuda")
     splits = load_splits(args.assets)
@@ -231,8 +261,18 @@ def main():
     save_json(args.out / "environment.json", environment(device))
     save_json(args.out / "config.json", {"exit_config": cfg, "batch_sizes": BATCH_SIZES,
                                         "exit_run": str(args.exit_run.resolve())})
-    fixed, shared, adaptive = select_policies(
-        make_route, reference, splits["validation"], encode, device, cfg, args.out)
+    if frozen is None:
+        fixed, shared, adaptive = select_policies(
+            make_route, reference, splits["validation"], encode, device, cfg, args.out)
+    else:
+        fixed, shared, adaptive = frozen
+        save_json(args.out / "selected_policies.json", {
+            "replayed_from": str(args.frozen_policies.resolve()),
+            "scalar_reference": reference,
+            "fixed": fixed,
+            "shared": shared,
+            "adaptive": adaptive,
+        })
     test_policies(make_route, reference, fixed, shared, adaptive, splits["test"], encode,
                   device, cfg, args.out, len(teacher.bert.encoder.layer))
 
