@@ -1,0 +1,37 @@
+{
+  "replayed_from": "/home/ekk294/efficientAI/reports/nyu_hpc/batch-exits-29406/selected_policies.json",
+  "scalar_reference": [
+    [
+      8,
+      0.76
+    ]
+  ],
+  "fixed": [
+    [
+      8,
+      0.76
+    ]
+  ],
+  "shared": [
+    [
+      8,
+      0.76
+    ]
+  ],
+  "adaptive": {
+    "1": [
+      [
+        8,
+        0.76
+      ]
+    ],
+    "4": [],
+    "16": [],
+    "32": [
+      [
+        8,
+        0.76
+      ]
+    ]
+  }
+}
