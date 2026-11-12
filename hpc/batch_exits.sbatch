@@ -11,5 +11,12 @@
 source "$SLURM_SUBMIT_DIR/hpc/env.sh"
 show_gpu
 export EXIT_RUN="${1:?Pass the completed multi-exit run directory}"
+export FROZEN_POLICIES="${2:-}"
 export OUT="results/batch-exits-$SLURM_JOB_ID"
-in_env '.venv/bin/python run_batch_exits.py --assets assets --exit-run "$EXIT_RUN" --out "$OUT"'
+in_env '
+args=()
+if [[ -n "$FROZEN_POLICIES" ]]; then
+  args+=(--frozen-policies "$FROZEN_POLICIES")
+fi
+.venv/bin/python run_batch_exits.py --assets assets --exit-run "$EXIT_RUN" --out "$OUT" "${args[@]}"
+'
