@@ -35,6 +35,19 @@ Percent change in median and p95 end-to-end batch latency relative to full FinBE
 
 In the NYU Torch B200 experiment, the freshly trained compact student reduced median latency from 2.559 to 1.885 ms (26.3%). Test macro-F1 was 0.879177 for the student and 0.878955 for the full model. That comparison used different hardware and teacher weights from the A100 runs.
 
+## Replay assets and raw results
+
+The four archives are listed below with SHA-256 checksums from the verified local copies. Team members can use these checksums after downloading the files. [FinBERT A100 experiment backups](https://drive.google.com/drive/folders/1VuMZ91NpdgtgvSS9TH6WBflB7dROEaLf?usp=drive_link)
+
+| Archive | Contents | SHA-256 |
+|---|---|---|
+| `finbert-a100-teacher-and-splits.tar.gz` | Teacher checkpoint, tokenizer, dataset splits, and asset manifest | `7a46a6bf913cd1866dab79c7c626d7b3c0ba5c3c0b15f1ca283093057e2d16bb` |
+| `exits-29383-replay-inputs.tar.gz` | Exit heads, calibration temperatures, configuration, selected policies, and matching asset manifest | `dbd4188edb801e4becf7a11345b2a78b07d85762df7e87146a6fe1e8ec942290` |
+| `batch-exits-29406-raw.tar.gz` | Original run's test timings, validation timings, and predictions | `f47f24a3b408bf7d4319eb088fecddca6ea4252ecabdca1b8dc89a3bc8860954` |
+| `batch-exits-29498-raw.tar.gz` | Frozen-policy repeat's test timings and predictions | `0f9d00731d03095e759f803000a1b6b48624826d00be718cfcbfe34577c6dc0a` |
+
+For replay, unpack the first two archives from the repository root. They restore `assets/` and `results/exits-default-29383/`. The frozen schedules for the repeat are in `reports/nyu_hpc/batch-exits-29406/selected_policies.json`.
+
 ## Sources
 
 - [Job 29406 metrics](https://github.com/shakeelriyaj/efficientAI/blob/f07d85bde533d2cf715379797b0177b12faafad9/reports/nyu_hpc/batch-exits-29406/metrics.csv)
