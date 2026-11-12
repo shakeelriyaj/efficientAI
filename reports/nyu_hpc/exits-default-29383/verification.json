@@ -1,0 +1,34 @@
+{
+  "simulation_matches_real_inference": true,
+  "simulation_mismatches": {
+    "full12": {
+      "labels": 0,
+      "depths": 0
+    },
+    "static2": {
+      "labels": 0,
+      "depths": 0
+    },
+    "static4": {
+      "labels": 0,
+      "depths": 0
+    },
+    "static8": {
+      "labels": 0,
+      "depths": 0
+    },
+    "dynamic_max_prob": {
+      "labels": 0,
+      "depths": 0
+    },
+    "dynamic_entropy": {
+      "labels": 0,
+      "depths": 0
+    }
+  },
+  "all_teacher_weights_unchanged": true,
+  "test_used_for_selection": false,
+  "test_set_reused": true,
+  "quality_examples": 1573,
+  "timed_predictions_checked": 18432
+}

@@ -1,0 +1,36 @@
+{
+  "selected_on": "validation",
+  "ranked_by": "e2e_p50_ms",
+  "validation_f1_drop_limit_pp": 0.75,
+  "finalists": [
+    "entropy_exits2-8_t0.51",
+    "entropy_exits2-4-8_t0.46",
+    "max_prob_exits2-4-8_t0.86",
+    "max_prob_exits2-8_t0.84",
+    "max_prob_exits4-8_t0.83",
+    "entropy_exits4-8_t0.48",
+    "max_prob_exits8_t0.76",
+    "entropy_exits8_t0.57"
+  ],
+  "selected": {
+    "max_prob": {
+      "name": "max_prob_exits8_t0.76",
+      "kind": "dynamic",
+      "rule": "max_prob",
+      "exit_layers": [
+        8
+      ],
+      "threshold": 0.76
+    },
+    "entropy": {
+      "name": "entropy_exits8_t0.57",
+      "kind": "dynamic",
+      "rule": "entropy",
+      "exit_layers": [
+        8
+      ],
+      "threshold": 0.57
+    }
+  },
+  "rules_without_an_eligible_policy": []
+}
