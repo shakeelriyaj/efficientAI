@@ -35,6 +35,43 @@ or hyperparameter search is needed to run this comparison.
 The proposal's multi-exit study has its own entry point, `run_exits.py`, with
 the exit logic in `exits.py` and settings in `exits.json` (see below).
 
+## Financial PhraseBank follow-up
+
+`run_phrasebank.py` selects a conservative layer-4/8 confidence policy on
+validation or replays a frozen policy. The saved policy uses threshold 0.92
+and records checksums of the assets, heads, temperatures, and run settings.
+The test split was evaluated in the earlier study and is reused here for
+comparison. It does not enter threshold selection. See the
+[paired Mac benchmark](reports/phrasebank/mac-conservative-metrics.csv).
+
+For an exact checkpoint replay, unpack the private PhraseBank input bundle
+into a scratch directory. It supplies `assets/` and `comparison/`. Use the
+same prepared `.venv` as the other benchmarks and create `logs/` first:
+
+```bash
+mkdir -p logs
+sbatch --account=csci_ga_3033-2026fa --partition=c12m85-a100-1 \
+  hpc/phrasebank.sbatch /path/to/assets /path/to/comparison
+```
+
+On Torch, use an active Torch account and `--constraint=cuda`. The job
+records paired batch-size-one FP32 end-to-end latency for both routes on
+one GPU. Metrics and verification are under `results/phrasebank-<job>-0/`.
+
+To train fresh weights, download `FinancialPhraseBank-v1.0.zip` from
+`takala/financial_phrasebank` revision `8d3fe0c36d5feec6b3cc5e455b0fcb4820fb9964`
+into `downloads/`. Place `config.json`, `vocab.txt`, and `pytorch_model.bin`
+from `yiyanghkust/finbert-pretrain` revision
+`88ab954a39ea6d3ce2b62cff086dd5ad1172c664` in `downloads/checkpoint/`.
+Use the following commands inside a GPU allocation. They train the full
+model, train and calibrate exit heads, and select a policy for those weights.
+
+```bash
+python tools/train_phrasebank.py --downloads downloads --out phrase-assets --device cuda
+python run_exits.py --assets phrase-assets --out phrase-exits --device cuda
+python run_phrasebank.py --assets phrase-assets --exit-run phrase-exits --out phrase-conservative --device cuda
+```
+
 ## What is reproduced
 
 1. **Saved-model replay:** load the exact Colab weights and compare every test

@@ -12,8 +12,13 @@ def encode(text, tokenizer, device, max_length):
 
 @torch.inference_mode()
 def benchmark(routes, tokenizer, frame, cfg, device, predictions):
-    if device.type != "cuda":
-        raise ValueError("Use a CUDA GPU for the latency benchmark.")
+    if device.type == "cuda":
+        def synchronize():
+            torch.cuda.synchronize(device)
+    elif device.type == "mps":
+        synchronize = torch.mps.synchronize
+    else:
+        raise ValueError("Use a CUDA or Apple MPS GPU for the latency benchmark.")
     rng = np.random.default_rng(cfg["timing_seed"])
     chosen = frame.iloc[rng.choice(len(frame), min(cfg["latency_samples"], len(frame)), replace=False)]
     texts, row_ids = chosen.text.tolist(), chosen.row_id.astype(int).tolist()
@@ -28,12 +33,12 @@ def benchmark(routes, tokenizer, frame, cfg, device, predictions):
             for index in rng.permutation(len(texts)):
                 for route_index in rng.permutation(len(names)):
                     name = names[route_index]
-                    torch.cuda.synchronize(device)
+                    synchronize()
                     started = time.perf_counter_ns()
                     inputs = tokens[index] if mode == "model" else encode(
                         texts[index], tokenizer, device, cfg["max_length"])
                     label, depth = routes[name](inputs)
-                    torch.cuda.synchronize(device)
+                    synchronize()
                     elapsed = (time.perf_counter_ns() - started) / 1e6
                     records.append({"name": name, "mode": mode, "repeat": repeat,
                                     "row_id": row_ids[index], "ms": elapsed,
