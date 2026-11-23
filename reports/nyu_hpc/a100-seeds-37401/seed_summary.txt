@@ -1,0 +1,9 @@
+Seeds (10): 1, 2, 3, 4, 5, 6, 7, 8, 9, 4142
+Full 12-layer macro-F1 (frozen): 0.878955
+Student test macro-F1:       mean 0.8781, sd 0.0028, min 0.8744, max 0.8840
+Student F1 drop (pp):        mean 0.088, sd 0.277, min -0.509, max 0.455
+Worst-seed F1 drop (pp):     0.455
+Runs within 1 pp budget:     10 of 10
+Selected epochs:             5, 2, 5, 3, 4, 4, 5, 5, 3, 4
+Median latency reduction (%): mean 28.4, sd 0.4, min 28.0, max 28.9
+Seed spread is training variation only; the test set was reused in development.

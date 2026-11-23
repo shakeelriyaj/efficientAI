@@ -1,0 +1,13 @@
+name, driver_version, memory.total [MiB]
+NVIDIA A100-SXM4-40GB, 610.43.02, 40960 MiB
+Epoch 0: validation macro-F1 0.800561
+Epoch 1: validation macro-F1 0.865108
+Epoch 2: validation macro-F1 0.881743
+Epoch 3: validation macro-F1 0.867237
+Epoch 4: validation macro-F1 0.875054
+Epoch 5: validation macro-F1 0.886654
+            name  macro_f1  mean_layers  f1_drop_pp  within_budget  unique_headlines  timed_predictions_per_mode  model_mean_ms  model_p50_ms  model_p95_ms  e2e_mean_ms  e2e_p50_ms  e2e_p95_ms
+          full12  0.878955    12.000000    0.000000           True               512                        1536       8.615282      8.589357      8.900948     8.937610    8.923612    9.209288
+dynamic8_quality  0.875099    10.329307    0.385644           True               512                        1536       7.683690      8.656955      9.027175     8.049333    9.024968    9.394776
+compact8_student  0.875921     8.000000    0.303383           True               512                        1536       6.096051      6.083102      6.286563     6.440271    6.429042    6.645131
+Differences from Colab: {'full12': {'labels': 0, 'depths': 0}, 'dynamic8_quality': {'labels': 0, 'depths': 0}, 'compact8_student': {'labels': 52, 'depths': 0}}

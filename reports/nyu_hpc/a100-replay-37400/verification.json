@@ -1,0 +1,11 @@
+{
+  "command": "verify",
+  "saved_routes_match_colab": true,
+  "all_teacher_weights_unchanged": true,
+  "student_backbone_frozen_during_training": false,
+  "test_used_for_selection": false,
+  "test_set_reused": true,
+  "quality_examples": 1573,
+  "timed_predictions_checked": 9216,
+  "student_quality_budget_met": true
+}

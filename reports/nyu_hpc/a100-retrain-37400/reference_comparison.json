@@ -1,0 +1,14 @@
+{
+  "full12": {
+    "labels": 0,
+    "depths": 0
+  },
+  "dynamic8_quality": {
+    "labels": 0,
+    "depths": 0
+  },
+  "compact8_student": {
+    "labels": 42,
+    "depths": 0
+  }
+}

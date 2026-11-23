@@ -250,3 +250,9 @@ Its predictions differ from the Colab-trained student on 42 headlines; a fresh
 training run is distinct from replaying the saved weights. Both GPU runs checked
 all 9,216 timed predictions. Reports and checkpoints remain under
 `results/replay-22013353` and `results/retrain-22013353` on Torch.
+
+On a Cloud Bursting A100 the replay again matched Colab exactly, and retraining
+was prediction-for-prediction identical to the B200 run (28.8% lower median
+latency). All ten training seeds met the budget: worst F1 drop 0.455 points,
+mean latency reduction 28.4%. See
+[the A100 student report](reports/nyu_hpc/a100-student-results.md).
