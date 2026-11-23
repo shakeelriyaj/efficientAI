@@ -1,0 +1,27 @@
+{
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "frozen_threshold": 0.92,
+  "test_examples": 970,
+  "a100_vs_mac_prediction_and_depth_mismatches": {
+    "full12_prediction": 0,
+    "full12_exit_layer": 0,
+    "dynamic_conservative_prediction": 0,
+    "dynamic_conservative_exit_layer": 0
+  },
+  "macro_f1_drop_pp": 0.6000119333907206,
+  "test_early_exit_percent": 44.74226804123712,
+  "test_f1_drop_bootstrap_95_percent_pp": [
+    -0.09674985234826487,
+    1.5246330512298334
+  ],
+  "latency_change_percent": {
+    "mean": -16.96618272164573,
+    "median": 7.292853185386483,
+    "p95": 8.724331140063256
+  },
+  "median_paired_e2e_delta_ms_by_exit_depth": {
+    "12": 0.5306924999999998,
+    "4": -3.2363289999999996,
+    "8": -1.2898170000000002
+  }
+}

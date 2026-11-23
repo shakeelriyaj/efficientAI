@@ -13,8 +13,13 @@ exit, and an eight-layer distilled student. English code; five small core files.
   history, including discarded trials. It is longer than the final codebase.
 - **Results:** [simple HPC report](reports/HPC_Reproduction_Report.txt), with
   metrics, predictions, raw timings, logs, and verification in `reports/nyu_hpc/`.
-- **Team context:** this work lives on the `finbert-hpc-reproduction` branch of
-  [the shared repository](https://github.com/shakeelriyaj/efficientAI).
+- **PhraseBank results:** [verified A100 comparison](reports/phrasebank/a100-results.md)
+  and its [raw results and verification](reports/phrasebank/a100-23431781/).
+- **Team context:** this PhraseBank follow-up lives on `phrasebank-hpc` in
+  [the shared repository](https://github.com/shakeelriyaj/efficientAI/tree/phrasebank-hpc).
+  The main three-model comparison and
+  [10-seed A100 results](https://github.com/shakeelriyaj/efficientAI/blob/finbert-hpc-reproduction/reports/nyu_hpc/a100-student-results.md)
+  are on `finbert-hpc-reproduction`.
 
 Large checkpoints and training inputs stay outside Git. Their exact input hashes
 are in `reference/assets_manifest.json`; the existing Torch copy is listed below.
@@ -36,6 +41,36 @@ The proposal's multi-exit study has its own entry point, `run_exits.py`, with
 the exit logic in `exits.py` and settings in `exits.json` (see below).
 
 ## Financial PhraseBank follow-up
+
+### Verified A100 results
+
+NYU Torch job **23431781** completed on November 17, 2026. Both routes used
+the same A100-SXM4-80GB, batch size 1, FP32, and the same inputs. End-to-end
+latency includes tokenization. Results were recovered and verified on November 23.
+
+| Route | Macro-F1 | F1 drop (percentage points) | Mean latency | Median latency | p95 latency |
+|---|---:|---:|---:|---:|---:|
+| Full 12 layers | 0.82327 | 0.00 | 5.843 ms | 5.829 ms | 5.947 ms |
+| Early exit at layers 4/8, threshold 0.92 | 0.81727 | 0.60 | 4.852 ms | 6.254 ms | 6.466 ms |
+
+**Early exit meets the observed 1-point F1 budget and reduces mean latency
+by 17.0%, but increases median latency by 7.3% and p95 by 8.7%.** Easy
+sentences save time, while sentences that reach layer 12 pay for the extra
+exit checks. This is an average-latency improvement, not an across-the-board
+response-time improvement.
+
+All 970 test predictions and exit depths match the Mac run, and all 6,144
+timing records passed independent checks. The test F1-drop bootstrap interval
+is [-0.097, 1.525] percentage points, so the observed budget pass does not
+establish a guaranteed population drop below 1 point.
+
+See the [short report](reports/phrasebank/a100-results.md) for the setup,
+limitations, and links to the [metrics](reports/phrasebank/a100-23431781/metrics.csv),
+[raw timings](reports/phrasebank/a100-23431781/timings.csv),
+[predictions](reports/phrasebank/a100-23431781/predictions.csv), and
+[verification](reports/phrasebank/a100-23431781/a100_check.json).
+
+### Reproduce the comparison
 
 `run_phrasebank.py` selects a conservative layer-4/8 confidence policy on
 validation or replays a frozen policy. The saved policy uses threshold 0.92

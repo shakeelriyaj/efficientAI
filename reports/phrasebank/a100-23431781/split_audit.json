@@ -1,0 +1,13 @@
+{
+  "raw_rows": 4846,
+  "conflicting_rows_removed": 4,
+  "exact_duplicates_removed": 9,
+  "retained": 4833,
+  "split_sizes": {
+    "calibration": 479,
+    "test": 970,
+    "train": 2903,
+    "validation": 481
+  },
+  "split_seed": 20261023
+}

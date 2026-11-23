@@ -1,0 +1,11 @@
+{
+  "verified_test_predictions": 970,
+  "verified_timing_rows": 6144,
+  "group_bootstrap_draws": 5000,
+  "f1_drop_95_percent_interval_pp": {
+    "dynamic_conservative": [
+      -0.09674985234826487,
+      1.5246330512298334
+    ]
+  }
+}
