@@ -1,0 +1,12 @@
+{
+  "source": "results/controlled-24682539/phrasebank",
+  "retrained": false,
+  "checkpoint_sha256": {
+    "ce-seed-4142": "805ec1c0f23ff2727ef8298c4e41d44735f9b1c33663cefbaa56d0f5ab935029",
+    "kd-seed-4142": "dffebce8734f6150e3c3aaf1b1442eb1eb67fd9099abb382c339b0d16236e2c3",
+    "ce-seed-1": "7acfca09ee437ddc527dc62f297f49ad6dc412f5f777698169abd92c599c933c",
+    "kd-seed-1": "60a7da0f44fba06e86032d5ed09f673d3f34790249efc3052777f5b8cfc3319a",
+    "ce-seed-2": "272d616294554c71d5ef9e3b2e8e789af60dfb32355f812f85b3edc688fc71d9",
+    "kd-seed-2": "2599e3586838632bffc89371fa731c1d0ef86abc48cdb16b0b4ce3c62ca2d54f"
+  }
+}

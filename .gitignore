@@ -2,6 +2,7 @@ assets/
 results/
 logs/
 .venv/
+.venv-*/
 .python/
 .bootstrap/
 .cache/

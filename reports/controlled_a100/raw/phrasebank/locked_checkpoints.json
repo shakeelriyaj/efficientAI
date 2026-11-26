@@ -1,0 +1,128 @@
+[
+  {
+    "name": "ce-seed-4142",
+    "objective": "ce",
+    "seed": 4142,
+    "directory": "results/controlled-24682539/phrasebank/ce-seed-4142",
+    "best_epoch": 4,
+    "validation_macro_f1": 0.8357040505441885,
+    "test_used_for_selection": false,
+    "kept_layers": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      12
+    ],
+    "validation_f1_drop_pp": 0.09533207980947367,
+    "validation_eligible": true
+  },
+  {
+    "name": "kd-seed-4142",
+    "objective": "kd",
+    "seed": 4142,
+    "directory": "results/controlled-24682539/phrasebank/kd-seed-4142",
+    "best_epoch": 3,
+    "validation_macro_f1": 0.8359519605480387,
+    "test_used_for_selection": false,
+    "kept_layers": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      12
+    ],
+    "validation_f1_drop_pp": 0.07054107942445764,
+    "validation_eligible": true
+  },
+  {
+    "name": "ce-seed-1",
+    "objective": "ce",
+    "seed": 1,
+    "directory": "results/controlled-24682539/phrasebank/ce-seed-1",
+    "best_epoch": 2,
+    "validation_macro_f1": 0.8368673747498859,
+    "test_used_for_selection": false,
+    "kept_layers": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      12
+    ],
+    "validation_f1_drop_pp": -0.0210003407602688,
+    "validation_eligible": true
+  },
+  {
+    "name": "kd-seed-1",
+    "objective": "kd",
+    "seed": 1,
+    "directory": "results/controlled-24682539/phrasebank/kd-seed-1",
+    "best_epoch": 2,
+    "validation_macro_f1": 0.8424091540540104,
+    "test_used_for_selection": false,
+    "kept_layers": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      12
+    ],
+    "validation_f1_drop_pp": -0.575178271172716,
+    "validation_eligible": true
+  },
+  {
+    "name": "ce-seed-2",
+    "objective": "ce",
+    "seed": 2,
+    "directory": "results/controlled-24682539/phrasebank/ce-seed-2",
+    "best_epoch": 1,
+    "validation_macro_f1": 0.8401709401709402,
+    "test_used_for_selection": false,
+    "kept_layers": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      12
+    ],
+    "validation_f1_drop_pp": -0.35135688286569433,
+    "validation_eligible": true
+  },
+  {
+    "name": "kd-seed-2",
+    "objective": "kd",
+    "seed": 2,
+    "directory": "results/controlled-24682539/phrasebank/kd-seed-2",
+    "best_epoch": 5,
+    "validation_macro_f1": 0.8419444948615925,
+    "test_used_for_selection": false,
+    "kept_layers": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      12
+    ],
+    "validation_f1_drop_pp": -0.5287123519309267,
+    "validation_eligible": true
+  }
+]

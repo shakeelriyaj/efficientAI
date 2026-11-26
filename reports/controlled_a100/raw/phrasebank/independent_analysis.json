@@ -1,0 +1,59 @@
+{
+  "quality_recomputed": true,
+  "timed_calls": 82560,
+  "overhead_calls": 61440,
+  "training_seeds": {
+    "ce": {
+      "mean_f1": 0.8130772568193906,
+      "std_f1": 0.0016392536602675518,
+      "mean_drop_pp": 1.019370480193153,
+      "worst_drop_pp": 1.207777152904943,
+      "budget_passes": 2,
+      "validation_passes": 3
+    },
+    "kd": {
+      "mean_f1": 0.8181123454976319,
+      "std_f1": 0.007745708622285735,
+      "mean_drop_pp": 0.5158616123690322,
+      "worst_drop_pp": 1.1059738210333792,
+      "budget_passes": 2,
+      "validation_passes": 3
+    }
+  },
+  "paired_overhead_median_ms": {
+    "e2e": {
+      "manual_loop": -0.14135300000000006,
+      "head_computation": 0.4456245000000001,
+      "host_check": 0.1618409999999999,
+      "total_check": 0.4646775000000005
+    },
+    "model": {
+      "manual_loop": -0.14182850000000036,
+      "head_computation": 0.44495299999999993,
+      "host_check": 0.16859250000000037,
+      "total_check": 0.4702510000000002
+    }
+  },
+  "f1_drop_group_bootstrap_95_pp": {
+    "ce8": [
+      -0.8091414507713601,
+      3.291630629466489
+    ],
+    "dynamic": [
+      -0.09335405146847525,
+      1.5614607581325615
+    ],
+    "kd8": [
+      -1.6252639869494279,
+      3.0814125988655334
+    ]
+  },
+  "dynamic_routing": {
+    "test_early_fraction": 0.44742268041237115,
+    "timing_fallback_fraction": 0.5703125,
+    "fallback_paired_median_ms": {
+      "e2e": 0.6664129999999999,
+      "model": 0.6620705
+    }
+  }
+}

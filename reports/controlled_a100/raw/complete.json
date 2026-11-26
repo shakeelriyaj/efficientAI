@@ -1,0 +1,25 @@
+{
+  "datasets": [
+    "sentfin",
+    "phrasebank"
+  ],
+  "same_gpu_configuration": true,
+  "same_gpu_allocation": false,
+  "allocations": {
+    "sentfin": {
+      "job_id": 24682539,
+      "complete_dataset_before_preemption": true
+    },
+    "phrasebank": {
+      "job_id": 24688746,
+      "checkpoint_training_job_id": 24682539
+    },
+    "same_gpu_model": "NVIDIA A100-SXM4-80GB",
+    "same_driver": "610.43.02",
+    "same_gpu_allocation": false,
+    "excluded_partial_phrasebank_attempts": [
+      24682539,
+      24688231
+    ]
+  }
+}

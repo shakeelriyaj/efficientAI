@@ -1,0 +1,19 @@
+{
+  "simulation_mismatches": {
+    "full12": {
+      "labels": 0,
+      "depths": 0
+    },
+    "dynamic_conservative": {
+      "labels": 0,
+      "depths": 0
+    }
+  },
+  "frozen_policy_sha256": "70dcb526fec8d7011132d7cf5792d66f559e975ed5bb9e4e207e10a1a31375cf",
+  "test_used_for_selection": false,
+  "test_previously_evaluated_in_initial_study": true,
+  "quality_examples": 970,
+  "timed_predictions_checked": 6144,
+  "checkpoint_retrained": false,
+  "replayed_frozen_policy": true
+}

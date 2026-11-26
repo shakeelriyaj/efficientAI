@@ -19,7 +19,7 @@ def distillation_loss(student, teacher, labels, cfg):
     return ((1 - weight) * gold + weight * imitation).mean()
 
 
-def train_student(teacher, tokenizer, splits, cfg, directory, device):
+def train_student(teacher, tokenizer, splits, cfg, directory, device, on_epoch=None):
     # Compute teacher targets once, on training data only, in the original row order.
     targets = logits_for(teacher, loader(splits["train"], tokenizer, cfg), device)
     dataset = Headlines(splits["train"], tokenizer, cfg["max_length"])
@@ -74,6 +74,8 @@ def train_student(teacher, tokenizer, splits, cfg, directory, device):
             student.save_pretrained(checkpoint, safe_serialization=True)
             tokenizer.save_pretrained(checkpoint)
         save_json(directory / "history.json", history)
+        if on_epoch is not None:
+            on_epoch(history[-1])
         print(f"Epoch {epoch}: validation macro-F1 {score:.6f}", flush=True)
     save_json(directory / "selection.json", {"best_epoch": best_epoch, "validation_macro_f1": best,
               "test_used_for_selection": False, "kept_layers": cfg["kept_layers"]})

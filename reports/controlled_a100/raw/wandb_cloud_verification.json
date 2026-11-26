@@ -1,0 +1,234 @@
+[
+  {
+    "id": "tnzane3n",
+    "name": "controlled-a100-protocol",
+    "state": "finished",
+    "artifacts": [
+      {
+        "name": "controlled-a100-protocol:v0",
+        "state": "COMMITTED"
+      }
+    ]
+  },
+  {
+    "id": "1r63a0m2",
+    "name": "sentfin-ce-seed-4142",
+    "state": "finished",
+    "artifacts": [
+      {
+        "name": "sentfin-ce-seed-4142-1r63a0m2:v0",
+        "state": "COMMITTED"
+      }
+    ]
+  },
+  {
+    "id": "fsgokfkh",
+    "name": "sentfin-kd-seed-4142",
+    "state": "finished",
+    "artifacts": [
+      {
+        "name": "sentfin-kd-seed-4142-fsgokfkh:v0",
+        "state": "COMMITTED"
+      }
+    ]
+  },
+  {
+    "id": "mxcorjc0",
+    "name": "sentfin-ce-seed-1",
+    "state": "finished",
+    "artifacts": [
+      {
+        "name": "sentfin-ce-seed-1-mxcorjc0:v0",
+        "state": "COMMITTED"
+      }
+    ]
+  },
+  {
+    "id": "fd4j3zjb",
+    "name": "sentfin-kd-seed-1",
+    "state": "finished",
+    "artifacts": [
+      {
+        "name": "sentfin-kd-seed-1-fd4j3zjb:v0",
+        "state": "COMMITTED"
+      }
+    ]
+  },
+  {
+    "id": "sk32nab5",
+    "name": "sentfin-ce-seed-2",
+    "state": "finished",
+    "artifacts": [
+      {
+        "name": "sentfin-ce-seed-2-sk32nab5:v0",
+        "state": "COMMITTED"
+      }
+    ]
+  },
+  {
+    "id": "flwj06ea",
+    "name": "sentfin-kd-seed-2",
+    "state": "finished",
+    "artifacts": [
+      {
+        "name": "sentfin-kd-seed-2-flwj06ea:v0",
+        "state": "COMMITTED"
+      }
+    ]
+  },
+  {
+    "id": "vu1wib28",
+    "name": "sentfin-evaluation",
+    "state": "finished",
+    "artifacts": [
+      {
+        "name": "run-vu1wib28-seed_quality:v0",
+        "state": "COMMITTED"
+      },
+      {
+        "name": "run-vu1wib28-quality:v0",
+        "state": "COMMITTED"
+      },
+      {
+        "name": "run-vu1wib28-timing:v0",
+        "state": "COMMITTED"
+      },
+      {
+        "name": "sentfin-evaluation-vu1wib28:v0",
+        "state": "COMMITTED"
+      }
+    ]
+  },
+  {
+    "id": "a23hp03m",
+    "name": "phrasebank-ce-seed-4142",
+    "state": "finished",
+    "artifacts": [
+      {
+        "name": "phrasebank-ce-seed-4142-a23hp03m:v0",
+        "state": "COMMITTED"
+      }
+    ]
+  },
+  {
+    "id": "lqhovtlw",
+    "name": "phrasebank-kd-seed-4142",
+    "state": "finished",
+    "artifacts": [
+      {
+        "name": "phrasebank-kd-seed-4142-lqhovtlw:v0",
+        "state": "COMMITTED"
+      }
+    ]
+  },
+  {
+    "id": "208a1plf",
+    "name": "phrasebank-ce-seed-1",
+    "state": "finished",
+    "artifacts": [
+      {
+        "name": "phrasebank-ce-seed-1-208a1plf:v0",
+        "state": "COMMITTED"
+      }
+    ]
+  },
+  {
+    "id": "4c3k9k77",
+    "name": "phrasebank-kd-seed-1",
+    "state": "finished",
+    "artifacts": [
+      {
+        "name": "phrasebank-kd-seed-1-4c3k9k77:v0",
+        "state": "COMMITTED"
+      }
+    ]
+  },
+  {
+    "id": "epmfwep4",
+    "name": "phrasebank-ce-seed-2",
+    "state": "finished",
+    "artifacts": [
+      {
+        "name": "phrasebank-ce-seed-2-epmfwep4:v0",
+        "state": "COMMITTED"
+      }
+    ]
+  },
+  {
+    "id": "j8pk90qd",
+    "name": "phrasebank-kd-seed-2",
+    "state": "finished",
+    "artifacts": [
+      {
+        "name": "phrasebank-kd-seed-2-j8pk90qd:v0",
+        "state": "COMMITTED"
+      }
+    ]
+  },
+  {
+    "id": "zfc4nk06",
+    "name": "phrasebank-evaluation",
+    "state": "finished",
+    "artifacts": [
+      {
+        "name": "run-zfc4nk06-seed_quality:v0",
+        "state": "COMMITTED"
+      },
+      {
+        "name": "run-zfc4nk06-quality:v0",
+        "state": "COMMITTED"
+      },
+      {
+        "name": "run-zfc4nk06-timing:v0",
+        "state": "COMMITTED"
+      },
+      {
+        "name": "phrasebank-evaluation-zfc4nk06:v0",
+        "state": "COMMITTED"
+      }
+    ]
+  },
+  {
+    "id": "435ttxp3",
+    "name": "controlled-a100-verified-results",
+    "state": "finished",
+    "artifacts": [
+      {
+        "name": "run-435ttxp3-sentfinquality-4wmi6w:v0",
+        "state": "COMMITTED"
+      },
+      {
+        "name": "run-435ttxp3-sentfinseed_quality-Yk41bg:v0",
+        "state": "COMMITTED"
+      },
+      {
+        "name": "run-435ttxp3-sentfinverified_timing_summary-IDM6ww:v0",
+        "state": "COMMITTED"
+      },
+      {
+        "name": "run-435ttxp3-sentfinverified_timing_sessions-TFglpw:v0",
+        "state": "COMMITTED"
+      },
+      {
+        "name": "run-435ttxp3-phrasebankquality-nrowIg:v0",
+        "state": "COMMITTED"
+      },
+      {
+        "name": "run-435ttxp3-phrasebankseed_quality-zIvRGQ:v0",
+        "state": "COMMITTED"
+      },
+      {
+        "name": "run-435ttxp3-phrasebankverified_timing_summary-hLRjAQ:v0",
+        "state": "COMMITTED"
+      },
+      {
+        "name": "run-435ttxp3-phrasebankverified_timing_sessions-OZYBYg:v0",
+        "state": "COMMITTED"
+      },
+      {
+        "name": "controlled-a100-independent-analysis:v0",
+        "state": "COMMITTED"
+      }
+    ]
+  }
+]

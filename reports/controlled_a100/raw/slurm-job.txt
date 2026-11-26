@@ -1,0 +1,4 @@
+JobID|State|Start|End|NodeList|Elapsed|ExitCode|AllocTRES
+24688746|COMPLETED|2026-11-26T00:41:28|2026-11-26T00:58:55|ga009|00:17:27|0:0|billing=1,cpu=1,gres/gpu=1,mem=24G,node=1
+24688746.batch|COMPLETED|2026-11-26T00:41:28|2026-11-26T00:58:55|ga009|00:17:27|0:0|cpu=1,gres/gpu=1,mem=24G,node=1
+24688746.extern|COMPLETED|2026-11-26T00:41:28|2026-11-26T00:58:58|ga009|00:17:30|0:0|billing=1,cpu=1,gres/gpu=1,mem=24G,node=1

@@ -1,0 +1,49 @@
+{
+  "model_id": "yiyanghkust/finbert-pretrain",
+  "model_revision": "88ab954a39ea6d3ce2b62cff086dd5ad1172c664",
+  "model_weights_sha256": "46dd5b5cbf7141b0c5d882516243abf71cfa4a27e57023c43290d655fccfb48c",
+  "dataset_revision": "8d3fe0c36d5feec6b3cc5e455b0fcb4820fb9964",
+  "dataset_sha256": "0e1a06c4900fdae46091d031068601e3773ba067c7cecb5b0da1dcba5ce989a6",
+  "teacher_recipe": {
+    "seed": 42,
+    "epochs": 3,
+    "learning_rate": 2e-05,
+    "weight_decay": 0.01,
+    "warmup_fraction": 0.1,
+    "batch_size": 16,
+    "max_length": 96
+  },
+  "teacher_device": "mps",
+  "teacher_history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.6542336477869509,
+      "validation_macro_f1": 0.8077631432079473
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.2858090531485187,
+      "validation_macro_f1": 0.8366573713422832
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.1518611961573393,
+      "validation_macro_f1": 0.8319772426155406
+    }
+  ],
+  "test_used_for_training_or_selection": false,
+  "sha256": {
+    "splits/calibration.jsonl": "d080084818f33216427c0848dd1494bec7bc28906bd12577d4d5526c84ca0317",
+    "splits/split_counts.csv": "31efac72ea1a6e27511fdd1279ae5f2e64a00f655cb8593a3ffb210b4c329a67",
+    "splits/split_manifest.csv": "273815c2d6dfb28ad50646ca100fe02af11c21e4a501c50a61c6df8fe8aedd21",
+    "splits/test.jsonl": "d6e70bd3964de9898acd63ddb1473cc44b00e943e4be6c5a78bf0386682583fa",
+    "splits/train.jsonl": "1596ffa0bbee012ff5806ab77ec9d69a1c84586b6de5a54b9f9ee1fa13e82289",
+    "splits/validation.jsonl": "143f47e9442070c847d4a57f763132ddddedb4eafa5f500a1d5cccba58062403",
+    "teacher/config.json": "254659ed34e3fcfaf868a79fda2d994b337bffceb4f5041617a54ca1d6087197",
+    "teacher/model.safetensors": "6b05cdefce6dadadd52098ea07326c2340fe8b7daf38a42625f52ac6238f83fd",
+    "teacher/special_tokens_map.json": "5d5b662e421ea9fac075174bb0688ee0d9431699900b90662acd44b2a350503a",
+    "teacher/tokenizer.json": "ec3b152f607dd48b28b9f8a0180eaac9614f7aebdbb66ef5376f509eea521203",
+    "teacher/tokenizer_config.json": "728f339446eb36034b456e80933b31713923bd4885a0d79893b699bd3ef48467",
+    "teacher/vocab.txt": "85f2481b4e3c25a7ece5e0e4930631a75c1a5fe2d31b0ecd9b5d51136ab98de8"
+  }
+}

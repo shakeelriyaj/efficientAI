@@ -1,0 +1,9 @@
+{
+  "teacher_unchanged": true,
+  "exit_heads_unchanged": true,
+  "quality_examples": 970,
+  "test_previously_used_in_development": true,
+  "test_used_for_checkpoint_or_policy_selection": false,
+  "timed_predictions_and_depths_checked": true,
+  "all_overhead_routes_match_full_predictions": true
+}

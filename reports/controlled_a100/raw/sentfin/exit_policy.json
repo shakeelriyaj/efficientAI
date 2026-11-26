@@ -1,0 +1,12 @@
+{
+  "thresholds": [
+    [
+      8,
+      0.9
+    ]
+  ],
+  "temperatures": {
+    "8": 1.2914971148258343
+  },
+  "head_fingerprint": "edbefe71ef0e61e1c6231cbd2a21a747d5583f6f7e5984f10501a9d2f4b33637"
+}

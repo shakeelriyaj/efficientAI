@@ -1,0 +1,29 @@
+{
+  "sha256": {
+    "colab_environment.json": "cacecf85d43e7cdc9d501e25345782a63e46b18a744ed78f74366af8cea3f98e",
+    "colab_metrics.csv": "ab61bc2af47ddd511df42fda3c076db65c2ef437d770280f3f73925f643daa86",
+    "colab_predictions.csv": "5a63cdebda2279600a943a747fd0135233d05aa1467c2845077df84fe48977c7",
+    "head8.pt": "d8be9ad326704e72ebdcdf509144f3db531a2552d135b0167f82f7df5c6c2eb8",
+    "splits/calibration.jsonl": "f4575966ee74eb19dfb15e5fbac923aedb11fa9d50b9c4be6b919a1cf89886d6",
+    "splits/split_counts.csv": "c83897ec7f99438259cdced4151a9053f5c0369e952052801af863f61de05996",
+    "splits/split_manifest.csv": "ff6101f2c293d4f3587b1480703b7eaae68d347ca2bb5c248825dbc58774c927",
+    "splits/test.jsonl": "332b554e1d53413f420e0f2049487719cd15ab60f8b5812420b1a03d58bf4a54",
+    "splits/train.jsonl": "d860532749faa313114028b475ca8eba39a7e252fabc1d5238528b6b1c66e2dd",
+    "splits/validation.jsonl": "fbfb442b88f767d5aeb96cfa9e952961bdcd49d181377add487239f8e1e3964e",
+    "student/config.json": "68783e46dc27ab449e3f31f2ddc177479f2439f7fe718d4315b49d67ac2d78c7",
+    "student/model.safetensors": "cc0a6be332ab8074cee6d4c4b7f99c29f68d4cd4667ba57f08b6102418d97d5a",
+    "student/special_tokens_map.json": "5d5b662e421ea9fac075174bb0688ee0d9431699900b90662acd44b2a350503a",
+    "student/tokenizer.json": "d542861653d0d204783c94395fdf32eef9e800d5fa565a2892c3f1375aa835e9",
+    "student/tokenizer_config.json": "37ad06449fc0057251fbc3534110fdfb6be31b88efec11eb8674333694d30359",
+    "student/vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+    "teacher/config.json": "5e58d0b92997c8ded9748859a8f71baf665b02ef67d7658c4a4e90440f618694",
+    "teacher/model.safetensors": "c2e60f6c425af3ffdc92bd75f2e0abea3d2c378d2fe8eba2637698e8504e2292",
+    "teacher/special_tokens_map.json": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3",
+    "teacher/tokenizer.json": "d542861653d0d204783c94395fdf32eef9e800d5fa565a2892c3f1375aa835e9",
+    "teacher/tokenizer_config.json": "7b082b48a08a0b5c5939d99472e33addce3d96202155e33f7928cecd171186a0",
+    "teacher/vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+  },
+  "split_seed": 20261023,
+  "dataset_commit": "eba43610fe3cb57a3e5773cd6c037da1f8992ad5",
+  "pretrained_model_revision": "0bc2ac10dda6929bcb1f77ccc43c7ec5c424f031"
+}

@@ -1,0 +1,128 @@
+[
+  {
+    "name": "ce-seed-4142",
+    "objective": "ce",
+    "seed": 4142,
+    "directory": "results/controlled-24682539/sentfin/ce-seed-4142",
+    "best_epoch": 5,
+    "validation_macro_f1": 0.8812759972695511,
+    "test_used_for_selection": false,
+    "kept_layers": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      12
+    ],
+    "validation_f1_drop_pp": -0.10361376594134608,
+    "validation_eligible": true
+  },
+  {
+    "name": "kd-seed-4142",
+    "objective": "kd",
+    "seed": 4142,
+    "directory": "results/controlled-24682539/sentfin/kd-seed-4142",
+    "best_epoch": 4,
+    "validation_macro_f1": 0.8818163047822872,
+    "test_used_for_selection": false,
+    "kept_layers": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      12
+    ],
+    "validation_f1_drop_pp": -0.15764451721496098,
+    "validation_eligible": true
+  },
+  {
+    "name": "ce-seed-1",
+    "objective": "ce",
+    "seed": 1,
+    "directory": "results/controlled-24682539/sentfin/ce-seed-1",
+    "best_epoch": 4,
+    "validation_macro_f1": 0.8827337591048882,
+    "test_used_for_selection": false,
+    "kept_layers": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      12
+    ],
+    "validation_f1_drop_pp": -0.249389949475054,
+    "validation_eligible": true
+  },
+  {
+    "name": "kd-seed-1",
+    "objective": "kd",
+    "seed": 1,
+    "directory": "results/controlled-24682539/sentfin/kd-seed-1",
+    "best_epoch": 5,
+    "validation_macro_f1": 0.888086285249261,
+    "test_used_for_selection": false,
+    "kept_layers": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      12
+    ],
+    "validation_f1_drop_pp": -0.7846425639123411,
+    "validation_eligible": true
+  },
+  {
+    "name": "ce-seed-2",
+    "objective": "ce",
+    "seed": 2,
+    "directory": "results/controlled-24682539/sentfin/ce-seed-2",
+    "best_epoch": 5,
+    "validation_macro_f1": 0.8763773087961723,
+    "test_used_for_selection": false,
+    "kept_layers": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      12
+    ],
+    "validation_f1_drop_pp": 0.38625508139653597,
+    "validation_eligible": false
+  },
+  {
+    "name": "kd-seed-2",
+    "objective": "kd",
+    "seed": 2,
+    "directory": "results/controlled-24682539/sentfin/kd-seed-2",
+    "best_epoch": 2,
+    "validation_macro_f1": 0.8771524103174605,
+    "test_used_for_selection": false,
+    "kept_layers": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      12
+    ],
+    "validation_f1_drop_pp": 0.30874492926771246,
+    "validation_eligible": false
+  }
+]

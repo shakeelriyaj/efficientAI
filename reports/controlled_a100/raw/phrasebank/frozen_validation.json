@@ -1,0 +1,9 @@
+{
+  "eligible": {
+    "full12": true,
+    "dynamic": true,
+    "ce8": true,
+    "kd8": true
+  },
+  "test_used": false
+}

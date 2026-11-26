@@ -1,0 +1,49 @@
+{
+  "max_length": 96,
+  "batch_size": 16,
+  "seed": 2,
+  "epochs": 5,
+  "learning_rate": 2e-05,
+  "weight_decay": 0.01,
+  "warmup_fraction": 0.1,
+  "gold_weight": 1.0,
+  "distillation_temperature": 2.0,
+  "kept_layers": [
+    1,
+    2,
+    4,
+    5,
+    7,
+    8,
+    10,
+    12
+  ],
+  "exit_layer": 8,
+  "exit_threshold": 0.9,
+  "exit_temperature": 1.2914971148258343,
+  "latency_samples": 512,
+  "timing_repeats": 5,
+  "timing_seed": 10143,
+  "warmup": 20,
+  "f1_drop_budget": 0.01,
+  "seeds": [
+    4142,
+    1,
+    2
+  ],
+  "primary_seed": 4142,
+  "batch_sizes": [
+    1,
+    4,
+    16,
+    32
+  ],
+  "timing_sessions": 3,
+  "validation_f1_margin_pp": 0.25,
+  "test_f1_budget_pp": 1.0,
+  "expected_gpu": "NVIDIA A100-SXM4-80GB",
+  "wandb_entity": "wk2376-efficient-ai",
+  "wandb_project": "finbert-controlled-a100",
+  "dataset": "sentfin",
+  "teacher_fingerprint": "1413364843652ac848814a1b91c82cc39f1507f05a4120159fc812494e2f85ae"
+}
